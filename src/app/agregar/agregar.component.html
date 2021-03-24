@@ -21,11 +21,11 @@
             <div *ngIf="formularioCreado.controls['correo'].invalid && formularioCreado.controls['correo'].dirty">
 
            
-               <div class="alert alert-danger" role="alert" >
+               <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['correo'].errors?.required">
                       El correo es Requerido!
                      </div>
 
-                     <div class="alert alert-danger" role="alert" >
+                     <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['correo'].errors?.email">
                      El correo debe tener un formato valido!
                </div>
             </div>
@@ -33,14 +33,19 @@
            <div class="form-group">
             <label>Contraseña</label>
             <input type="password" formControlName="contraséña" class="form-control" name="" id="">
-            <div class="alert alert-danger" role="alert">
-                La contraseña es requerida!
-              </div>
+            
+            <div *ngIf="formularioCreado.controls['contraséña'].invalid && formularioCreado.controls['contraséña'].dirty">        
+                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['contraséña'].errors?.required">
+                  La contraseña es requerida!
+                  </div>
 
-              <div class="alert alert-danger" role="alert">
-                La contraseña debe tener minimo 6 caracteres!
-              </div>
-        </div>
+                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['contraséña'].errors?.minlength">
+                  La contraseña debe tener minimo 6 caracteres!
+                  </div>
+            </div>
+
+       
+            </div>
 
            <button [disabled]="!formularioCreado.valid" class="btn btn-primary" (click)="agregar()">Agregar</button>
     </form>
