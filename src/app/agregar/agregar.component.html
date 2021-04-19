@@ -32,14 +32,14 @@
         </div>
            <div class="form-group">
             <label>Contraseña</label>
-            <input type="password" formControlName="contraséña" class="form-control" name="" id="">
+            <input type="password" formControlName="clave" class="form-control" name="" id="">
             
-            <div *ngIf="formularioCreado.controls['contraséña'].invalid && formularioCreado.controls['contraséña'].dirty">        
-                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['contraséña'].errors?.required">
+            <div *ngIf="formularioCreado.controls['clave'].invalid && formularioCreado.controls['clave'].dirty">        
+                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['clave'].errors?.required">
                   La contraseña es requerida!
                   </div>
 
-                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['contraséña'].errors?.minlength">
+                  <div class="alert alert-danger" role="alert" *ngIf="formularioCreado.controls['clave'].errors?.minlength">
                   La contraseña debe tener minimo 6 caracteres!
                   </div>
             </div>
@@ -47,10 +47,23 @@
        
             </div>
 
-           <button [disabled]="!formularioCreado.valid" class="btn btn-primary" (click)="agregar()">Agregar</button>
-    </form>
+           <button *ngIf="esNuevo" [disabled]="!formularioCreado.valid" class="btn btn-primary" (click)="agregar()">Agregar</button>
+           <button *ngIf="!esNuevo" [disabled]="!formularioCreado.valid" class="btn btn-success" (click)="editar()">Editar</button>
+            
+          </form>
 </div>
 
-<p class="container">Formulario valid: {{ formularioCreado.valid }}</p>
+<!--<p class="container">Formulario valid: {{ formularioCreado.valid }}</p>
 
 <p class="container">Formulario value: {{ formularioCreado.value | json}}</p>
+
+-->
+<div class="container" *ngFor="let item of listaUsuarios; let posicion = index">
+  <h4>{{ item.nombre }} esta en la posicion {{ posicion }}</h4>
+  <p>{{ item.correo }}</p>
+  <p>{{ item.clave }}</p>
+
+  <button (click)="editarUsuarioActual(posicion)">Editar Usuario</button>
+  <button (click)="eliminarUsuarioActual(posicion)">Eliminar Usuario</button>
+
+</div>
